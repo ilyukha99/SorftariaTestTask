@@ -86,6 +86,7 @@ public class MainApplicationService {
             String url = entry.getKey();
             if (!newUrls.contains(url)) {
                 res += compareUsingStringCompare(modifiedUrlSources, url);
+                //res += compareUsingEncoding(modifiedUrlSources, url);
             }
         }
 
