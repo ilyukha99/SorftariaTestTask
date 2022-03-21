@@ -1,0 +1,12 @@
+algorithm:
+  algorithmName: SHA3-256
+
+path:
+  todayDirectory: src/main/resources/html/TodayHTMLs
+  yesterdayDirectory: src/main/resources/html/YesterdayHTMLs
+  todayUrlsPath: src/main/resources/html/Today's_URLs
+  yesterdayUrlsPath: src/main/resources/html/Yesterday's_URLs
+
+name:
+  first: Инна
+  middle: Александровна
