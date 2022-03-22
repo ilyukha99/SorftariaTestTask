@@ -2,6 +2,7 @@ package com.my_solution.sorftaria_test_task.services;
 
 import com.my_solution.sorftaria_test_task.configurations.SecretaryNameConfiguration;
 import com.my_solution.sorftaria_test_task.encoders.IEncoder;
+import com.my_solution.sorftaria_test_task.encoders.exceptions.AbstractEncodingException;
 import com.my_solution.sorftaria_test_task.readers.enums.TimeConstraint;
 import com.my_solution.sorftaria_test_task.readers.exceptions.AbstractReadingException;
 import org.slf4j.Logger;
@@ -32,12 +33,8 @@ public class MainApplicationService {
     }
 
     public void init() {
-        try {
-            yesterdaySiteStates = fileReadingService.fillMap(TimeConstraint.YESTERDAY);
-            todaySiteStates = fileReadingService.fillMap(TimeConstraint.TODAY);
-        } catch (AbstractReadingException exception) {
-            LOGGER.error(exception.getMessage(), exception);
-        }
+        yesterdaySiteStates = fileReadingService.fillMap(TimeConstraint.YESTERDAY);
+        todaySiteStates = fileReadingService.fillMap(TimeConstraint.TODAY);
     }
 
     public Set<String> getMissingUrls(Map<String, String> first, Map<String, String> second) {
@@ -114,7 +111,12 @@ public class MainApplicationService {
     }
 
     public void startExecution() {
-        init();
-        System.out.println(makeEmail());
+        try {
+            init();
+            System.out.println(makeEmail());
+        }
+        catch (AbstractReadingException | AbstractEncodingException exception) {
+            LOGGER.error(exception.getMessage());
+        }
     }
 }
