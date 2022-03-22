@@ -4,6 +4,7 @@ import com.my_solution.sorftaria_test_task.configurations.PathsConfiguration;
 import com.my_solution.sorftaria_test_task.readers.FileWorker;
 import com.my_solution.sorftaria_test_task.readers.enums.TimeConstraint;
 import com.my_solution.sorftaria_test_task.utils.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
@@ -16,6 +17,7 @@ public class FileReadingService {
     private final FileWorker reader;
     private final PathsConfiguration configuration;
 
+    @Autowired
     public FileReadingService(FileWorker reader, PathsConfiguration configuration) {
         this.reader = reader;
         this.configuration = configuration;
@@ -44,9 +46,9 @@ public class FileReadingService {
 
         HashMap<String, String> results = new HashMap<>();
         for (Path path : paths) {
-            String pathString = getNameWithoutExtension(path);
-            if (urls.contains(pathString)) {
-                results.put(pathString, reader.read(path));
+            String fileName = getNameWithoutExtension(path);
+            if (urls.contains(fileName)) {
+                results.put(fileName, reader.read(path));
             }
         }
 
